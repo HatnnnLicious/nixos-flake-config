@@ -5,11 +5,6 @@ NixOS + home-manager.
 
 # What this provides
 
-- [Minimal version](./minimal):
-    - NixOS configuration on `nixos/configuration.nix`, accessible via
-      `nixos-rebuild --flake .`
-    - Home-manager configuration on `home-manager/home.nix`, accessible via
-      `home-manager --flake .`
 - [Standard version](./standard):
     - Basic boilerplate for adding custom packages (under `pkgs`) and overlays
       (under `overlay`). Accessible on your system, home config, as well as `nix
@@ -18,25 +13,6 @@ NixOS + home-manager.
       (`modules/home-manager`) modules
     - NixOS and home-manager configurations from minimal, and they should
       also use your overlays and custom packages right out of the box.
-
-# Getting started
-
-Assuming you have a basic NixOS booted up (either live or installed, anything
-works). [Here's a link to the latest NixOS downloads, just for
-you](https://nixos.org/download#download-nixos).
-
-Alternatively, you can totally use `nix` and `home-manager` on your existing
-distro (or even on Darwin). [Install nix](https://nixos.org/download.html#nix)
-and follow along (just ignore the `nixos-*` commands).
-
-## What template to chose?
-
-If this is your first trying flakes, or you're attempting to migrate your
-(simple) config to it; you should use the minimal version.
-
-If you're here looking for inspiration/tips/good practices (and you already use
-flakes), or you're migrating a config that already has overlays and custom
-packages; try the standard version.
 
 ## I like your funny words, magic man
 
