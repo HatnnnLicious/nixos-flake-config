@@ -1,5 +1,5 @@
 # This is your home-manager configuration file
-# Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
+# Use this Wto configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 {
   inputs,
   outputs,
@@ -49,13 +49,24 @@
 
   # TODO: Set your username
   home = {
-    username = "your-username";
-    homeDirectory = "/home/your-username";
+    username = "Julien";
+    homeDirectory = "/home/julien";
   };
 
   # Add stuff for your user as you see fit:
-  # programs.neovim.enable = true;
-  # home.packages = with pkgs; [ steam ];
+    programs.neovim.enable = true;
+    home.packages = with pkgs; [ 
+        android-studio
+        cryptomator
+	ledger-live-desktop
+	ledger-udev-rules
+	htop
+	qownnotes
+	retroarch
+	steam
+  	virt-manager
+	yubikey-manager 
+   ];
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
