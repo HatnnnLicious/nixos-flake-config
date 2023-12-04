@@ -40,21 +40,33 @@
     ];
     # Configure your nixpkgs instance
     config = {
-      # Disable if you don't want unfree packages
+      # Allow unfree packages
       allowUnfree = true;
       # Workaround for https://github.com/nix-community/home-manager/issues/2942
       allowUnfreePredicate = _: true;
     };
   };
 
-  # TODO: Set your username
+  # Home configuration
   home = {
     username = "Julien";
     homeDirectory = "/home/julien";
   };
 
-  # Add stuff for your user as you see fit:
+  # Enable home-manager
+  programs.home-manager.enable = true;  
+
+  # Git configuration
+    programs.git = {
+      enable = true;
+      userName = "HatnnnLicious";
+      userEmail = "codingdoggo@protonmail.com";
+    };
+
+  # NeoVim configuration
     programs.neovim.enable = true;
+
+  # Packages only for Julien
     home.packages = with pkgs; [ 
         android-studio
         cryptomator
@@ -67,10 +79,6 @@
   	virt-manager
 	yubikey-manager 
    ];
-
-  # Enable home-manager and git
-  programs.home-manager.enable = true;
-  programs.git.enable = true;
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
