@@ -1,5 +1,5 @@
 {
-  description = "NixOS + standalone home-manager config flakes to get you started!";
+  description = "My NixOS configuration";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
@@ -15,13 +15,6 @@
     ];
   in {
     templates = {
-      minimal = {
-        description = ''
-          Minimal flake - contains only the configs.
-          Contains the bare minimum to migrate your existing legacy configs to flakes.
-        '';
-        path = ./minimal;
-      };
       standard = {
         description = ''
           Standard flake - augmented with boilerplate for custom packages, overlays, and reusable modules.

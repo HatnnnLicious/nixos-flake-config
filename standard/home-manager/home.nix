@@ -1,5 +1,5 @@
 # This is your home-manager configuration file
-# Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
+# Use this Wto configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 {
   inputs,
   outputs,
@@ -40,26 +40,45 @@
     ];
     # Configure your nixpkgs instance
     config = {
-      # Disable if you don't want unfree packages
+      # Allow unfree packages
       allowUnfree = true;
       # Workaround for https://github.com/nix-community/home-manager/issues/2942
       allowUnfreePredicate = _: true;
     };
   };
 
-  # TODO: Set your username
+  # Home configuration
   home = {
-    username = "your-username";
-    homeDirectory = "/home/your-username";
+    username = "Julien";
+    homeDirectory = "/home/julien";
   };
 
-  # Add stuff for your user as you see fit:
-  # programs.neovim.enable = true;
-  # home.packages = with pkgs; [ steam ];
+  # Enable home-manager
+  programs.home-manager.enable = true;  
 
-  # Enable home-manager and git
-  programs.home-manager.enable = true;
-  programs.git.enable = true;
+  # Git configuration
+    programs.git = {
+      enable = true;
+      userName = "HatnnnLicious";
+      userEmail = "codingdoggo@protonmail.com";
+    };
+
+  # NeoVim configuration
+    programs.neovim.enable = true;
+
+  # Packages only for Julien
+    home.packages = with pkgs; [ 
+        android-studio
+        cryptomator
+	ledger-live-desktop
+	ledger-udev-rules
+	htop
+	qownnotes
+	retroarch
+	steam
+  	virt-manager
+	yubikey-manager 
+   ];
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
