@@ -1,0 +1,21 @@
+{
+ TODO: Add julien to the relevant groups
+  users.users = {
+    julien = {
+      initialPassword = "horsePassword";
+      isNormalUser = true;
+      openssh.authorizedKeys.keys = [
+        # TODO: Consider adding SSH keys
+      ];
+      extraGroups = ["wheel"];
+    };
+
+    mamiko = {
+      initialPassword = "Password1234";
+      isNormalUser = true;
+      openssh.authorizedKeys.keys = [
+        # TODO: Add my SSH keys
+      ];
+    };
+  };  
+}

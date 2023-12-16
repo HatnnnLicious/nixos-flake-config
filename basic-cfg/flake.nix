@@ -59,13 +59,19 @@
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#spectre'
     nixosConfigurations = {
-      # FIXME replace with your hostname
       spectre = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
           # > Our main nixos configuration file <
           ./nixos/configuration.nix
         ];
+      };
+
+      latitude = nixpkgs.lib.nixosSystem {
+	specialArgs = {inherit inputs outputs;};
+	modules = [
+	  ./nixos/configuration.nix
+	];
       };
     };
 

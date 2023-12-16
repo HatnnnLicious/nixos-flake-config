@@ -18,7 +18,8 @@
     # inputs.hardware.nixosModules.common-ssd
 
     # You can also split up your configuration and import pieces of it here:
-    # ./users.nix
+    ./users.nix
+    ./japanese.nix
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
@@ -71,7 +72,7 @@
     auto-optimise-store = true;
   };
 
-  # FIXME: Add the rest of your current configuration
+  # These programs are those that will be common to all users
   environment.systemPackages = with pkgs; [
     bitwarden
     brave
@@ -84,34 +85,30 @@
     rustdesk
     signal-desktop
   ];
-  # TODO: Set your hostname
+  # Hostname
   networking.hostName = "spectre";
 
-  # TODO: This is just an example, be sure to use whatever bootloader you prefer
-  boot.loader.systemd-boot.enable = true;
+## TODO: Add julien to the relevant groups
+#  users.users = {
+#    julien = {
+#      initialPassword = "horsePassword";
+#      isNormalUser = true;
+#      openssh.authorizedKeys.keys = [
+#        # TODO: Consider adding SSH keys
+#      ];
+#      extraGroups = ["wheel"];
+#    };
+#
+#    mamiko = {
+#      initialPassword = "Password1234";
+#      isNormalUser = true;
+#      openssh.authorizedKeys.keys = [
+#        # TODO: Add my SSH keys
+#      ];
+#    };
+#  };
 
-  # TODO: Configure your system-wide user settings (groups, etc), add more users as needed.
-  users.users = {
-    # FIXME: Replace with your username
-    julien = {
-      # TODO: You can set an initial password for your user.
-      # If you do, you can skip setting a root password by passing '--no-root-passwd' to nixos-install.
-      # Be sure to change it (using passwd) after rebooting!
-      initialPassword = "passwordHorse";
-      isNormalUser = true;
-      openssh.authorizedKeys.keys = [
-        # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
-      ];
-      # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
-      extraGroups = ["wheel"];
-    };
-    mamiko = {
-      initialPassword = "passwd"
-      isNormalUser = true;
-    };
-  };
-
-  # This setups a SSH server. Very important if you're setting up a headless system.
+  # This setups a SSH server. Very important if you're setting up a headless system. 
   # Feel free to remove if you don't need it.
  # services.openssh = {
  #   enable = true;
@@ -123,9 +120,30 @@
  #   };
  # };
 
+  # Bootloader
+    boot.loader.systemd-boot.enable = true;
+
   # Automatic updates
     system.autoUpgrade.emable = true;
     system.autoUpgrade.allowReboot = true;
+
+  # Limit the number of generations to keep
+    boot.loader.systemd-boot.configurationLimit = 7;
+  #  boot.loader.grub.configurationLimit = 7;
+
+  # Perform garbage collection weekly to maintain low disk usage
+    nix.gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 1w";
+    };
+
+  # Optimise storage
+  # This can be manually run via:
+  #   nix-store --optimise
+  # Refer to the following link for more details:
+  # https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-auto-optimise-store
+ 
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";
