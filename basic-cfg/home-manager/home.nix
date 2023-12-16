@@ -1,5 +1,5 @@
 # This is your home-manager configuration file
-# Use this Wto configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
+# Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 {
   inputs,
   outputs,
@@ -18,6 +18,9 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
+      
+    # Users
+      ./users
   ];
 
   nixpkgs = {
